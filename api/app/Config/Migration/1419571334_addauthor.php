@@ -8,6 +8,23 @@ class AddAuthor extends CakeMigration {
  */
 	public $description = 'addAuthor';
 
+	public $records = array(
+		'Comment' => array(
+			array(
+				'text' => 'test1',
+				'author' => 'Tester'
+			),
+			array(
+				'text' => 'test2',
+				'author' => 'Tester'
+			),
+			array(
+				'text' => 'test3',
+				'author' => 'Tester'
+			),
+		)
+	);
+
 /**
  * Actions to be performed
  *
@@ -45,6 +62,32 @@ class AddAuthor extends CakeMigration {
  * @return bool Should process continue
  */
 	public function after($direction) {
+		if ($direction === 'up') {
+			foreach ($this->records as $model => $records) {
+				if (!$this->updateRecords($model, $records)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+/**
+ * Update model records
+ *
+ * @param string $model model name to update
+ * @param string $records records to be stored
+ * @param $scope
+ * @return boolean Should process continue
+ */
+	public function updateRecords($model, $records, $scope = null) {
+		$Model = $this->generateModel($model);
+		foreach ($records as $record) {
+			$Model->create();
+			if (!$Model->save($record, false)) {
+				return false;
+			}
+		}
 		return true;
 	}
 }

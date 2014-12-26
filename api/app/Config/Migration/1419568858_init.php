@@ -9,17 +9,6 @@ class Init extends CakeMigration {
 	public $description = 'init';
 
 	public $records = array(
-		'Comment' => array(
-			array(
-				'text' => 'test1',
-			),
-			array(
-				'text' => 'test2',
-			),
-			array(
-				'text' => 'test3',
-			),
-		)
 	);
 /**
  * Actions to be performed

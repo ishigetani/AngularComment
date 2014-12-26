@@ -14,8 +14,8 @@ class Comment extends AppModel {
 	public $validate = array(
 		'text' => array(
 			'maxLength' => array(
-				'rule' => array('maxLength'),
-				//'message' => 'Your custom message here',
+				'rule' => array('maxLength', 255),
+				'message' => array('String width exceeds limitation of %d.', 255),
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -23,9 +23,19 @@ class Comment extends AppModel {
 			),
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
+				'message' => 'This is required field.',
 				//'allowEmpty' => false,
 				//'required' => false,
+				'last' => true, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'author' => array(
+			'maxLength' => array(
+				'rule' => array('maxLength', 50),
+				'message' => array('String width exceeds limitation of %d.', 50),
+				//'allowEmpty' => false,
+				'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),

@@ -13,6 +13,16 @@ class CommentsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator', 'Api');
+
+	public function index() {
+		$comments = $this->Comment->find('all');
+
+		if (!empty($comments)) {
+			$this->Api->success($comments);
+		} else {
+			$this->Api->error(__('Not found Comments.'));
+		}
+	}
 
 }
