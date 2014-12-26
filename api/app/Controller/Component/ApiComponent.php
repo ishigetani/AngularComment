@@ -57,7 +57,7 @@ class ApiComponent extends Component {
         $this->result['error']['message'] = $message;
         $this->result['error']['code'] = $code;
 
-        $this->response->statusCode(400);
+        $this->controller->response->statusCode(400);
         $this->controller->set('meta', $this->result['meta']);
         $this->controller->set('error', $this->result['error']);
         $this->controller->set('_serialize', array('meta', 'error'));

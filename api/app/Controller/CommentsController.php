@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
  * Comments Controller
  *
  * @property Comment $Comment
- * @property PaginatorComponent $Paginator
+ * @property ApiComponent $Api
  */
 class CommentsController extends AppController {
 
@@ -13,7 +13,7 @@ class CommentsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Api');
+	public $components = array('Api');
 
 	public function index() {
 		$comments = $this->Comment->find('all');
@@ -24,5 +24,4 @@ class CommentsController extends AppController {
 			$this->Api->error(__('Not found Comments.'));
 		}
 	}
-
 }
