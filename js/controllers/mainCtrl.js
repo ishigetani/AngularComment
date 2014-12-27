@@ -2,20 +2,21 @@
  * Created by ishigetani on 2014/12/26.
  */
 
-angular.module('mainCtrl', []).controller('mainController', function($scope, $http, Comment) {
+angular.module('mainCtrl', []).controller('mainController', function($scope, $http, Comment, $sessionStorage) {
     $scope.commentData = {};
-    $scope.commentData.author = 'test';
 
-    $scope.loading = true;
+    $scope.$storage = $sessionStorage.$default({
+        author: 'Tester'
+    });
 
     Comment.get().success(function(data) {
         $scope.comments = data.response;
-        $scope.loading = false;
     }).error(function(data) {
         $.notify("Error.", 'error');
     });
 
     $scope.submitComment = function() {
+        $scope.commentData.author = $scope.$storage.author;
         Comment.save($scope.commentData).success(function(data) {
             $scope.comments.unshift(data.response);
             $scope.commentData.text = '';
