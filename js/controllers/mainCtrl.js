@@ -2,31 +2,36 @@
  * Created by ishigetani on 2014/12/26.
  */
 
-angular.module('mainCtrl', []).controller('mainController', function($scope, $http, Comment) {
+angular.module('mainCtrl', []).controller('mainController', function($scope, $http, Comment, $sessionStorage) {
     $scope.commentData = {};
-    $scope.commentData.author = 'test';
 
-    $scope.loading = true;
+    $scope.$storage = $sessionStorage.$default({
+        author: 'Tester'
+    });
 
     Comment.get().success(function(data) {
         $scope.comments = data.response;
-        $scope.loading = false;
+    }).error(function(data) {
+        $.notify("Error.", 'error');
     });
 
     $scope.submitComment = function() {
+        $scope.commentData.author = $scope.$storage.author;
         Comment.save($scope.commentData).success(function(data) {
-            $scope.comments.push(data.response);
+            $scope.comments.unshift(data.response);
             $scope.commentData.text = '';
+            $.notify("Complete.", 'success');
         }).error(function(data) {
-            console.log(data);
+            $.notify("Save Error.", 'error');
         });
     };
 
-    $scope.deleteComment = function(id) {
-        Comment.deleteId(id).success(function(data){
-            Comment.get().success(function(allData) {
-                $scope.comments = allData.response;
-            });
+    $scope.deleteComment = function(index) {
+        Comment.deleteId($scope.comments[index].Comment.id).success(function(data){
+            $scope.comments.splice(index, 1);
+            $.notify("Complete.", 'success');
+        }).error(function(data) {
+            $.notify("Delete Error.", 'error');
         })
     }
 });
