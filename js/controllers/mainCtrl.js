@@ -15,18 +15,16 @@ angular.module('mainCtrl', []).controller('mainController', function($scope, $ht
 
     $scope.submitComment = function() {
         Comment.save($scope.commentData).success(function(data) {
-            $scope.comments.push(data.response);
+            $scope.comments.unshift(data.response);
             $scope.commentData.text = '';
         }).error(function(data) {
             console.log(data);
         });
     };
 
-    $scope.deleteComment = function(id) {
-        Comment.deleteId(id).success(function(data){
-            Comment.get().success(function(allData) {
-                $scope.comments = allData.response;
-            });
+    $scope.deleteComment = function(index) {
+        Comment.deleteId($scope.comments[index].Comment.id).success(function(data){
+            $scope.comments.splice(index, 1);
         })
     }
 });
