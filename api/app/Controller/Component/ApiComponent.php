@@ -73,12 +73,13 @@ class ApiComponent extends Component {
     {
         $this->result['error']['message'] = 'Validation Error';
         $this->result['error']['code'] = '422';
+        $this->result['meta']['data'] = $this->controller->request->data;
         $this->result['error']['validation'][$modelName] = array();
         foreach ($validationErrors as $value) {
             $this->result['error']['validation'][$modelName][] = $value[0];
         }
 
-        $this->response->statusCode(400);
+        $this->controller->response->statusCode(400);
         $this->controller->set('meta', $this->result['meta']);
         $this->controller->set('error', $this->result['error']);
         $this->controller->set('_serialize', array('meta', 'error'));

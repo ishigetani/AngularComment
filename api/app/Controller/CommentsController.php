@@ -24,4 +24,20 @@ class CommentsController extends AppController {
 			$this->Api->error(__('Not found Comments.'));
 		}
 	}
+
+	public function save() {
+		if ($this->Comment->save($this->request->data)) {
+			$this->Api->success($this->Comment->find('first', array('conditions' => array('id' => $this->Comment->getLastInsertID()))));
+		} else {
+			$this->Api->validationError('Comment', $this->Comment->validationErrors);
+		}
+	}
+
+	public function deleteId($id = null) {
+		if (!empty($id) && $this->Comment->delete($id)) {
+			$this->Api->success();
+		} else {
+			$this->Api->error(__('Not Deleted.'));
+		}
+	}
 }
