@@ -34,7 +34,7 @@ class AddAuthor extends CakeMigration {
 		'up' => array(
 			'create_field' => array(
 				'comments' => array(
-					'author' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1', 'after' => 'text'),
+					'author' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8', 'after' => 'text'),
 				),
 			),
 		),
