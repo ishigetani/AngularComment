@@ -6,6 +6,8 @@ App::uses('AppModel', 'Model');
  */
 class Comment extends AppModel {
 
+	public $order = 'Comment.modified DESC';
+
 /**
  * Validation rules
  *
