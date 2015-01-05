@@ -34,4 +34,6 @@ angular.module('mainCtrl', []).controller('mainController', function($scope, $ht
             $.notify("Delete Error.", 'error');
         })
     }
+}).run(function(editableOptions) {
+    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });

@@ -7,6 +7,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/loading-bar.css" rel="stylesheet" type="text/css">
+    <link href="css/xeditable.css" rel="stylesheet" type="text/css">
     <style>
         .meta {
             padding-left:5em;
@@ -54,9 +55,20 @@
     </div>
 </form>
 
-<div class="well well-small" ng-repeat="comment in comments">
-    <i class="fa fa-user"></i> {{comment.Comment.author}}<small class="meta">{{comment.Comment.modified}}</small><a href="#" ng-click="deleteComment($index)" class="pull-right">delete</a>
-    <p>{{comment.Comment.text}}</p>
+<div class="well" ng-repeat="comment in comments">
+    <div class="row">
+        <div class="col-sm-12">
+            <i class="fa fa-user"></i> {{comment.Comment.author}}<small class="meta">{{comment.Comment.modified}}</small>
+            <div class="pull-right">
+                <a href="#" ng-click="textBtnForm.$show()"><i class="fa fa-edit"></i></a><a href="#" ng-click="deleteComment($index)"><i class="fa fa-remove"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <span editable-text="comment.Comment.text" e-form="textBtnForm">{{comment.Comment.text}}</span>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -65,6 +77,7 @@
 $('#config').modal();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.7/angular.min.js"></script>
+<script src="js/download/xeditable.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.7/angular-animate.min.js"></script>
 <script src="js/download/ngStorage.min.js"></script>
 <script src="js/controllers/mainCtrl.js"></script>
