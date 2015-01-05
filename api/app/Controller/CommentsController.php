@@ -43,4 +43,13 @@ class CommentsController extends AppController {
 			$this->Api->error(__('Not Deleted.'));
 		}
 	}
+
+	public function edit() {
+		if (!$this->request->is('put')) throw new BadRequestException(__('It is a request that is not allowed.'));
+		if (!empty($this->request->data['id']) && $this->Comment->save($this->request->data)) {
+			$this->Api->success();
+		} else {
+			$this->Api->validationError('Comment', $this->Comment->validationErrors);
+		}
+	}
 }
