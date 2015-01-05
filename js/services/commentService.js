@@ -17,6 +17,14 @@ angular.module('commentService', []).factory('Comment', function($http, Constant
         },
         deleteId : function(id) {
             return $http.delete(Constant.BaseUrl+'api/comments/deleteId/'+id);
+        },
+        edit : function(commentData) {
+            return $http({
+                method: 'PUT',
+                url: Constant.BaseUrl+'api/comments/edit',
+                headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                data: $.param(commentData)
+            });
         }
     }
 });

@@ -47,7 +47,7 @@ class CommentsController extends AppController {
 	public function edit() {
 		if (!$this->request->is('put')) throw new BadRequestException(__('It is a request that is not allowed.'));
 		if (!empty($this->request->data['id']) && $this->Comment->save($this->request->data)) {
-			$this->Api->success();
+			$this->Api->success($this->Comment->find('first', array('conditions' => array('id' => $this->request->data['id']))));
 		} else {
 			$this->Api->validationError('Comment', $this->Comment->validationErrors);
 		}

@@ -66,7 +66,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <span editable-text="comment.Comment.text" e-form="textBtnForm">{{comment.Comment.text}}</span>
+            <span editable-text="comment.Comment.text" e-form="textBtnForm" onbeforesave="editComment(comment.Comment.id, $data)">{{comment.Comment.text}}</span>
         </div>
     </div>
 </div>

@@ -33,7 +33,13 @@ angular.module('mainCtrl', []).controller('mainController', function($scope, $ht
         }).error(function(data) {
             $.notify("Delete Error.", 'error');
         })
-    }
+    };
+
+    $scope.editComment = function(id, text) {
+        var data = {id: id, text: text, author: $scope.$storage.author};
+        return Comment.edit(data);
+    };
+
 }).run(function(editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
