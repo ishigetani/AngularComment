@@ -41,3 +41,5 @@ Ajax通信の時に画面上部にアニメーションを表示
 AngularJs上から簡単にSessionやloaclStorageにアクセスする
 * [Notify.js](http://notifyjs.com/)  
 右上に出るメッセージ
+* [Angular-xeditable](http://vitalets.github.io/angular-xeditable/#overview)  
+編集時に使用(v1.1で追加)
