@@ -19,7 +19,7 @@
 1. /api/以下のCakePHPのいつもの設定（DBの設定・tmp書き込み等）
 2. Migrationを全て起動
 ```
-php cake.php Migration.migration run all
+php cake.php Migrations.migration run all
 ```
 
 ### Front側の設定(AngularJS)
